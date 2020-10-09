@@ -3,8 +3,12 @@ def operation(some_list):
     index = 0
     for i in range(len(some_list)):
         if some_list[i] - some_list[index] == 1:
-            count += 1
-            index = i
+            if i != len(some_list) - 1:
+                    if some_list[i] == some_list[i + 1]:
+                        count += 1
+                        index = i
+            else:
+                count += 1
         else:
             index = i
     return f'\nNumber of monotone areas = {count}'
