@@ -17,6 +17,6 @@ def sin1(x, eps):
 
 eps = 0.01
 for i in range(0, 6):
-    x = math.pi / 4
+    x = 2
     print(f'eps = {eps}; sin({x}) = {sin1(x, eps)} and {math.sin(x)}')
     eps /= 10
