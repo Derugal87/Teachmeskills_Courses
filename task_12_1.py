@@ -31,24 +31,6 @@ class Time:
         seconds = self.h * 60 * 60 + self.m * 60 + self.s
         self.operation(seconds)
 
-    def __eq__(self, other):
-        return self.h == other.h and self.m == other.m and self.s == other.s
-
-    def __ne__(self, other):
-        return self.h != other.h or self.m != other.m or self.s != other.s
-
-    def __lt__(self, other):
-        return self.h < other.h or self.m < other.m or self.s < other.s
-
-    def __gt__(self, other):
-        return self.h > other.h or self.m > other.m or self.s > other.s
-
-    def __le__(self, other):
-        return self.h <= other.h or self.m <= other.m or self.s <= other.s
-
-    def __ge__(self, other):
-        return self.h >= other.h or self.m >= other.m or self.s >= other.s
-
     def __add__(self, other):
         seconds = (self.h + other.h) * 60 * 60 + (self.m + other.m) * 60 + self.s + other.s
         self.operation(seconds)
@@ -81,24 +63,42 @@ class Time:
         self.m = (seconds - self.h * 60 * 60) // 60
         self.s = (seconds - self.h * 60 * 60) % 60
 
+    def __eq__(self, other):
+        return self.h == other.h and self.m == other.m and self.s == other.s
+
+    def __ne__(self, other):
+        return self.h != other.h or self.m != other.m or self.s != other.s
+
+    def __lt__(self, other):
+        return (self.h * 60 * 60 + self.m * 60 + self.s) < (other.h * 60 * 60 + other.m * 60 + other.s)
+
+    def __gt__(self, other):
+        return (self.h * 60 * 60 + self.m * 60 + self.s) > (other.h * 60 * 60 + other.m * 60 + other.s)
+
+    def __le__(self, other):
+        return (self.h * 60 * 60 + self.m * 60 + self.s) <= (other.h * 60 * 60 + other.m * 60 + other.s)
+
+    def __ge__(self, other):
+        return (self.h * 60 * 60 + self.m * 60 + self.s) >= (other.h * 60 * 60 + other.m * 60 + other.s)
+
     def __str__(self):
         return f'Time is {self.h}:{self.m}:{self.s}'
 
-t1 = Time('0:0:3')
-t2 = Time('0:0:2')
+
+t1 = Time('1:1:3')
+t2 = Time('1:1:2')
+print(f't1 == t2: {t1 == t2}')
+print(f't1 != t2: {t1 != t2}')
+print(f't1 > t2: {t1 > t2}')
+print(f't1 < t2: {t1 < t2}')
+print(f't1 >= t2: {t1 >= t2}')
+print(f't1 <= t2: {t1 <= t2}')
+print(f't1 * number: {t1 * 2}')
 # print(t1 + t2)
 # print(t1 - t2)
-print(t1 * 2)
-print(t1 == t2)
-print(t1 != t2)
-print(t1 > t2)
-print(t1 < t2)
-print(t1 >= t2)
-print(t1 <= t2)
 print(Time(Time(Time(Time(Time('13:6:23'))))))
 print(Time(13, 6, 23))
 print(Time('13:61:89'))
 print(Time())
 print(Time(1, 142, 53, 54))
 print(Time(126583))
-
