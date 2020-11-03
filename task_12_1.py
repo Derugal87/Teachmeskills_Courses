@@ -4,20 +4,17 @@ class Time:
             self.__init_with_instance(*args)
         elif len(args) == 1 and type(args[0]) is str:
             self.h, self.m, self.s = map(int, args[0].split(':'))
-            seconds = self.h * 60 * 60 + self.m * 60 + self.s
-            self.operation(seconds)
+            self.format_time()
         elif len(args) == 1 and type(args[0]) is int:
             self.h = int(str(args[0])[:2])
             self.m = int(str(args[0])[2:4])
             self.s = int(str(args[0])[4:])
-            seconds = self.h * 60 * 60 + self.m * 60 + self.s
-            self.operation(seconds)
+            self.format_time()
         elif len(args) == 3:
             self.h = args[0]
             self.m = args[1]
             self.s = args[2]
-            seconds = self.h * 60 * 60 + self.m * 60 + self.s
-            self.operation(seconds)
+            self.format_time()
         else:
             self.h = 0
             self.m = 0
@@ -28,40 +25,37 @@ class Time:
         self.h = o.h
         self.m = o.m
         self.s = o.s
+        self.format_time()
+
+    def format_time(self):
         seconds = self.h * 60 * 60 + self.m * 60 + self.s
-        self.operation(seconds)
-
-    def __add__(self, other):
-        seconds = (self.h + other.h) * 60 * 60 + (self.m + other.m) * 60 + self.s + other.s
-        self.operation(seconds)
-        return Time(
-            self.h,
-            self.m,
-            self.s,
-        )
-
-    def __sub__(self, other):
-        seconds = abs(self.h - other.h) * 60 * 60 + abs(self.m - other.m) * 60 + abs(self.s - other.s)
-        self.operation(seconds)
-        return Time(
-            self.h,
-            self.m,
-            self.s,
-        )
-
-    def __mul__(self, other):
-        seconds = (self.h * other * 60 * 60) + (self.m * other * 60) + self.s * other
-        self.operation(seconds)
-        return Time(
-            self.h,
-            self.m,
-            self.s,
-        )
-
-    def operation(self, seconds):
         self.h = seconds // (60 * 60)
         self.m = (seconds - self.h * 60 * 60) // 60
         self.s = (seconds - self.h * 60 * 60) % 60
+
+
+    def __add__(self, other):
+        seconds = (self.h + other.h) * 60 * 60 + (self.m + other.m) * 60 + self.s + other.s
+        return self.format_time_after_operation(seconds)
+
+    def __sub__(self, other):
+        seconds = abs(self.h - other.h) * 60 * 60 + abs(self.m - other.m) * 60 + abs(self.s - other.s)
+        return self.format_time_after_operation(seconds)
+
+    def __mul__(self, other):
+        seconds = (self.h * other * 60 * 60) + (self.m * other * 60) + self.s * other
+        return self.format_time_after_operation(seconds)
+
+    @staticmethod
+    def format_time_after_operation(seconds):
+        h = seconds // (60 * 60)
+        m = (seconds - h * 60 * 60) // 60
+        s = (seconds - h * 60 * 60) % 60
+        return Time(
+            h,
+            m,
+            s,
+        )
 
     def __eq__(self, other):
         return self.h == other.h and self.m == other.m and self.s == other.s
@@ -94,8 +88,8 @@ print(f't1 < t2: {t1 < t2}')
 print(f't1 >= t2: {t1 >= t2}')
 print(f't1 <= t2: {t1 <= t2}')
 print(f't1 * number: {t1 * 2}')
-# print(t1 + t2)
-# print(t1 - t2)
+print(t1 + t2)
+print(t1 - t2)
 print(Time(Time(Time(Time(Time('13:6:23'))))))
 print(Time(13, 6, 23))
 print(Time('13:61:89'))
