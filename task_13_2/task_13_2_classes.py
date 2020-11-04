@@ -5,16 +5,16 @@ class Math:
     def __init__(self, x=None, y=None):
         self.x, self.y = x, y
 
-    def __add__(self):
+    def add_numbers(self):
         return self.x + self.y
 
-    def __sub__(self):
+    def sub_numbers(self):
         return self.x - self.y
 
-    def __mul__(self):
+    def mul_numbers(self):
         return self.x * self.y
 
-    def __truediv__(self):
+    def div_numbers(self):
         try:
             if self.y == 0:
                 raise DivideByZeroException('You can\'t divide by zero')

@@ -25,13 +25,13 @@ while True:
                        '0 - exit\n')
 
         if choose == '1':
-            print(math.__add__())
+            print(math.add_numbers())
         elif choose == '2':
-            print(math.__sub__())
+            print(math.sub_numbers())
         elif choose == '3':
-            print(math.__mul__())
+            print(math.mul_numbers())
         elif choose == '4':
-            print(math.__truediv__())
+            print(math.div_numbers())
         elif choose == '0':
             exit(0)
         else:
