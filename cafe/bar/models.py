@@ -4,7 +4,7 @@ from django.db import models
 class Position(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=200)
-    salary = models.FloatField()
+    salary = models.FloatField(default=0.0)
 
 
 class Reward(models.Model):
@@ -18,7 +18,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=20)
     address = models.CharField(max_length=45)
     phone_number = models.CharField(max_length=9)
-    age = models.IntegerField(not None)
+    age = models.IntegerField(default=0)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
 
 
@@ -36,12 +36,12 @@ class Client(models.Model):
 
 class Menu(models.Model):
     description = models.CharField(max_length=200)
-    price = models.FloatField(not None)
+    price = models.FloatField(default=0.0)
 
 
 class Order(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     client = models.OneToOneField(Client, on_delete=models.CASCADE)
-    reward_date = models.DateTimeField()
-    salary = models.FloatField(not None)
+    order_date = models.DateTimeField()
+    price = models.FloatField(default=0.0)
